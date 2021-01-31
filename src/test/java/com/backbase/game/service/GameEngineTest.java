@@ -1,9 +1,8 @@
 package com.backbase.game.service;
 
 import com.backbase.game.exception.GameException;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -16,7 +15,6 @@ import com.backbase.game.evaluate.EvaluateGameFlow;
 import com.backbase.game.exception.IllegalMoveException;
 
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class GameEngineTest {
 
@@ -32,20 +30,20 @@ public class GameEngineTest {
         evaluateGame.execute(game, game.getBoard().getPitByPitId(1));
 
         //then
-        Assert.assertEquals(Integer.valueOf(0), game.getBoard().getStoneCountByPitId(1));
-        Assert.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(2) );
-        Assert.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(3));
-        Assert.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(4));
-        Assert.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(5));
-        Assert.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(6));
-        Assert.assertEquals(Integer.valueOf(1), game.getBoard().getStoneCountByPitId(7));
-        Assert.assertEquals(GameStatus.PLAYER1_TURN, game.getGameStatus());
-        Assert.assertEquals(Integer.valueOf(1), game.getBoard().getPits().get(Board.PLAYER1_KALAH).getStoneCount());
-        Assert.assertEquals(Integer.valueOf(0), game.getBoard().getPits().get(Board.PLAYER2_KALAH).getStoneCount());
+        Assertions.assertEquals(Integer.valueOf(0), game.getBoard().getStoneCountByPitId(1));
+        Assertions.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(2) );
+        Assertions.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(3));
+        Assertions.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(4));
+        Assertions.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(5));
+        Assertions.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(6));
+        Assertions.assertEquals(Integer.valueOf(1), game.getBoard().getStoneCountByPitId(7));
+        Assertions.assertEquals(GameStatus.PLAYER1_TURN, game.getGameStatus());
+        Assertions.assertEquals(Integer.valueOf(1), game.getBoard().getPits().get(Board.PLAYER1_KALAH).getStoneCount());
+        Assertions.assertEquals(Integer.valueOf(0), game.getBoard().getPits().get(Board.PLAYER2_KALAH).getStoneCount());
 
     }
 
-    @Test(expected = IllegalMoveException.class)
+    @Test
     public void shouldNotStartWithEmptyPit(){
         //given
         Game game = new Game(6);
@@ -53,18 +51,22 @@ public class GameEngineTest {
         pit.setStoneCount(0);
 
         //when
+        Assertions.assertThrows(IllegalMoveException.class, () -> {
         evaluateGame.execute(game, game.getBoard().getPitByPitId(2));
+        });
 
     }
 
-    @Test(expected = IllegalMoveException.class)
+    @Test
     public void shouldNotStartWithOpponentPit(){
         //given
         Game game = new Game(6);
         game.setGameStatus(GameStatus.PLAYER2_TURN);
 
         //when
-        evaluateGame.execute(game, game.getBoard().getPitByPitId(2));
+        Assertions.assertThrows(IllegalMoveException.class, () -> {
+            evaluateGame.execute(game, game.getBoard().getPitByPitId(2));
+        });
     }
     @Test
     public void shouldDistributeStoneFromPlayer2PitToPlayer1Pit() {
@@ -75,16 +77,16 @@ public class GameEngineTest {
         evaluateGame.execute(game, game.getBoard().getPitByPitId(12));
 
         //then
-        Assert.assertEquals(Integer.valueOf(0), game.getBoard().getStoneCountByPitId(12));
-        Assert.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(13));
-        Assert.assertEquals(Integer.valueOf(1), game.getBoard().getStoneCountByPitId(14));
-        Assert.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(1));
-        Assert.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(2));
-        Assert.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(3));
-        Assert.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(4));
-        Assert.assertEquals(GameStatus.PLAYER1_TURN, game.getGameStatus());
-        Assert.assertEquals(Integer.valueOf(0), game.getBoard().getPits().get(Board.PLAYER1_KALAH).getStoneCount());
-        Assert.assertEquals(Integer.valueOf(1), game.getBoard().getPits().get(Board.PLAYER2_KALAH).getStoneCount());
+        Assertions.assertEquals(Integer.valueOf(0), game.getBoard().getStoneCountByPitId(12));
+        Assertions.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(13));
+        Assertions.assertEquals(Integer.valueOf(1), game.getBoard().getStoneCountByPitId(14));
+        Assertions.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(1));
+        Assertions.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(2));
+        Assertions.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(3));
+        Assertions.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(4));
+        Assertions.assertEquals(GameStatus.PLAYER1_TURN, game.getGameStatus());
+        Assertions.assertEquals(Integer.valueOf(0), game.getBoard().getPits().get(Board.PLAYER1_KALAH).getStoneCount());
+        Assertions.assertEquals(Integer.valueOf(1), game.getBoard().getPits().get(Board.PLAYER2_KALAH).getStoneCount());
     }
 
     @Test
@@ -96,16 +98,16 @@ public class GameEngineTest {
         evaluateGame.execute(game, game.getBoard().getPitByPitId(4));
 
         //then
-        Assert.assertEquals(Integer.valueOf(0), game.getBoard().getStoneCountByPitId(4));
-        Assert.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(5));
-        Assert.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(6));
-        Assert.assertEquals(Integer.valueOf(1), game.getBoard().getStoneCountByPitId(7));
-        Assert.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(8));
-        Assert.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(9));
-        Assert.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(10));
-        Assert.assertEquals(GameStatus.PLAYER2_TURN, game.getGameStatus());
-        Assert.assertEquals(Integer.valueOf(1), game.getBoard().getPits().get(Board.PLAYER1_KALAH).getStoneCount());
-        Assert.assertEquals(Integer.valueOf(0), game.getBoard().getPits().get(Board.PLAYER2_KALAH).getStoneCount());
+        Assertions.assertEquals(Integer.valueOf(0), game.getBoard().getStoneCountByPitId(4));
+        Assertions.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(5));
+        Assertions.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(6));
+        Assertions.assertEquals(Integer.valueOf(1), game.getBoard().getStoneCountByPitId(7));
+        Assertions.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(8));
+        Assertions.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(9));
+        Assertions.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(10));
+        Assertions.assertEquals(GameStatus.PLAYER2_TURN, game.getGameStatus());
+        Assertions.assertEquals(Integer.valueOf(1), game.getBoard().getPits().get(Board.PLAYER1_KALAH).getStoneCount());
+        Assertions.assertEquals(Integer.valueOf(0), game.getBoard().getPits().get(Board.PLAYER2_KALAH).getStoneCount());
     }
 
     @Test
@@ -119,16 +121,16 @@ public class GameEngineTest {
         evaluateGame.execute(game, game.getBoard().getPitByPitId(4));
 
         //then
-        Assert.assertEquals(Integer.valueOf(0), game.getBoard().getStoneCountByPitId(4));
-        Assert.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(5));
-        Assert.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(6));
-        Assert.assertEquals(Integer.valueOf(13), game.getBoard().getStoneCountByPitId(7));
-        Assert.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(8));
-        Assert.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(9));
-        Assert.assertEquals(Integer.valueOf(0), game.getBoard().getStoneCountByPitId(10));
-        Assert.assertEquals(GameStatus.PLAYER2_TURN, game.getGameStatus());
-        Assert.assertEquals(Integer.valueOf(13), game.getBoard().getPits().get(Board.PLAYER1_KALAH).getStoneCount());
-        Assert.assertEquals(Integer.valueOf(0), game.getBoard().getPits().get(Board.PLAYER2_KALAH).getStoneCount());
+        Assertions.assertEquals(Integer.valueOf(0), game.getBoard().getStoneCountByPitId(4));
+        Assertions.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(5));
+        Assertions.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(6));
+        Assertions.assertEquals(Integer.valueOf(13), game.getBoard().getStoneCountByPitId(7));
+        Assertions.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(8));
+        Assertions.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(9));
+        Assertions.assertEquals(Integer.valueOf(0), game.getBoard().getStoneCountByPitId(10));
+        Assertions.assertEquals(GameStatus.PLAYER2_TURN, game.getGameStatus());
+        Assertions.assertEquals(Integer.valueOf(13), game.getBoard().getPits().get(Board.PLAYER1_KALAH).getStoneCount());
+        Assertions.assertEquals(Integer.valueOf(0), game.getBoard().getPits().get(Board.PLAYER2_KALAH).getStoneCount());
     }
 
     @Test
@@ -145,12 +147,12 @@ public class GameEngineTest {
         evaluateGame.execute(game, game.getBoard().getPitByPitId(1));
 
         //then
-        Assert.assertEquals(Integer.valueOf(0), game.getBoard().getStoneCountByPitId(1));
-        Assert.assertEquals(Integer.valueOf(0), game.getBoard().getStoneCountByPitId(3) );
-        Assert.assertEquals(Integer.valueOf(0), game.getBoard().getStoneCountByPitId(11));
-        Assert.assertEquals(GameStatus.PLAYER2_TURN, game.getGameStatus());
-        Assert.assertEquals(Integer.valueOf(7), game.getBoard().getPits().get(Board.PLAYER1_KALAH).getStoneCount());
-        Assert.assertEquals(Integer.valueOf(0), game.getBoard().getPits().get(Board.PLAYER2_KALAH).getStoneCount());
+        Assertions.assertEquals(Integer.valueOf(0), game.getBoard().getStoneCountByPitId(1));
+        Assertions.assertEquals(Integer.valueOf(0), game.getBoard().getStoneCountByPitId(3) );
+        Assertions.assertEquals(Integer.valueOf(0), game.getBoard().getStoneCountByPitId(11));
+        Assertions.assertEquals(GameStatus.PLAYER2_TURN, game.getGameStatus());
+        Assertions.assertEquals(Integer.valueOf(7), game.getBoard().getPits().get(Board.PLAYER1_KALAH).getStoneCount());
+        Assertions.assertEquals(Integer.valueOf(0), game.getBoard().getPits().get(Board.PLAYER2_KALAH).getStoneCount());
     }
 
 
@@ -163,7 +165,7 @@ public class GameEngineTest {
         evaluateGame.execute(game, game.getBoard().getPitByPitId(1));
 
         //then
-        Assert.assertEquals(GameStatus.PLAYER1_TURN, game.getGameStatus());
+        Assertions.assertEquals(GameStatus.PLAYER1_TURN, game.getGameStatus());
     }
 
 
@@ -176,7 +178,7 @@ public class GameEngineTest {
         evaluateGame.execute(game, game.getBoard().getPitByPitId(2));
 
         //then
-        Assert.assertEquals(GameStatus.PLAYER2_TURN, game.getGameStatus());
+        Assertions.assertEquals(GameStatus.PLAYER2_TURN, game.getGameStatus());
     }
 
 
@@ -192,7 +194,7 @@ public class GameEngineTest {
         evaluateGame.execute(game, game.getBoard().getPitByPitId(8));
 
         //then
-        Assert.assertEquals(GameStatus.PLAYER2_TURN, game.getGameStatus());
+        Assertions.assertEquals(GameStatus.PLAYER2_TURN, game.getGameStatus());
     }
 
 
@@ -214,8 +216,8 @@ public class GameEngineTest {
         evaluateGame.execute(game, game.getBoard().getPitByPitId(6));
 
         //then
-        Assert.assertEquals(GameStatus.FINISHED, game.getGameStatus());
-        Assert.assertEquals(game.getWinner(), game.getPlayer1());
+        Assertions.assertEquals(GameStatus.FINISHED, game.getGameStatus());
+        Assertions.assertEquals(game.getWinner(), game.getPlayer1());
     }
 
     @Test
@@ -236,8 +238,8 @@ public class GameEngineTest {
         evaluateGame.execute(game, game.getBoard().getPitByPitId(6));
 
         //then
-        Assert.assertEquals(GameStatus.FINISHED, game.getGameStatus());
-        Assert.assertEquals(game.getWinner(), game.getPlayer1());
+        Assertions.assertEquals(GameStatus.FINISHED, game.getGameStatus());
+        Assertions.assertEquals(game.getWinner(), game.getPlayer1());
     }
 
     @Test
@@ -257,8 +259,8 @@ public class GameEngineTest {
         evaluateGame.execute(game, game.getBoard().getPitByPitId(13));
 
         //then
-        Assert.assertEquals(GameStatus.FINISHED, game.getGameStatus());
-        Assert.assertEquals(game.getWinner(), game.getPlayer2());
+        Assertions.assertEquals(GameStatus.FINISHED, game.getGameStatus());
+        Assertions.assertEquals(game.getWinner(), game.getPlayer2());
     }
 
     @Test
@@ -279,8 +281,8 @@ public class GameEngineTest {
         evaluateGame.execute(game, game.getBoard().getPitByPitId(6));
 
         //then
-        Assert.assertEquals(GameStatus.FINISHED, game.getGameStatus());
-        Assert.assertEquals(game.getWinner(), null);
+        Assertions.assertEquals(GameStatus.FINISHED, game.getGameStatus());
+        Assertions.assertEquals(game.getWinner(), null);
     }
 
 }

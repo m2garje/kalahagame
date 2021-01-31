@@ -8,9 +8,9 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import com.backbase.game.configuration.ApplicationConfig;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -35,7 +35,6 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
  * @author Mahesh G
  *
  */
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class GameServiceTest {
 
@@ -47,6 +46,9 @@ public class GameServiceTest {
 
     @Autowired
     private Game gameService;
+
+    @Autowired
+    private ApplicationConfig applConfig;
 
     @Test
     public void shouldInitGame(){
@@ -64,7 +66,7 @@ public class GameServiceTest {
         GameResponse mockGame = gameService.initializeAGame(6);
 
         //then
-        Assert.assertEquals(gameResponse, mockGame);
+        Assertions.assertEquals(gameResponse, mockGame);
 
     }
 
@@ -78,7 +80,7 @@ public class GameServiceTest {
         board.setPits(initPit());
 
         String id = UUID.randomUUID().toString();
-        com.backbase.game.model.Game game = new com.backbase.game.model.Game(Board.INITIAL_STONE_ON_PIT);
+        com.backbase.game.model.Game game = new com.backbase.game.model.Game(applConfig.getNoOfStones());
         game.setGameStatus(GameStatus.INIT);
         game.setId(id);
         game.setPlayer1(player1);
@@ -104,18 +106,18 @@ public class GameServiceTest {
         GameResponse mockResponse =  gameService.play(game.getId(), game.getBoard().getPits().get(1).getPitId());
 
         //then
-        Assert.assertEquals(gameResponse.getStatus().isEmpty(), mockResponse.getStatus().isEmpty());
+        Assertions.assertEquals(gameResponse.getStatus().isEmpty(), mockResponse.getStatus().isEmpty());
     }
 
     private Map<Integer, Pit> initPit(){
         Map<Integer, Pit> pits = new HashMap<>();
 
-        pits.putAll(createPits(Board.PIT_START_ID, Board.PLAYER1_KALAH, Board.INITIAL_STONE_ON_PIT, Player.PLAYER_1.getPlayerId()));
+        pits.putAll(createPits(Board.PIT_START_ID, Board.PLAYER1_KALAH, applConfig.getNoOfStones(), Player.PLAYER_1.getPlayerId()));
 
         Pit house1 = new Pit(Board.PLAYER1_KALAH, Board.INITIAL_STONE_ON_KALAH, Player.PLAYER_1.getPlayerId());
         pits.put(Board.PLAYER1_KALAH, house1);
 
-        pits.putAll(createPits(Board.PLAYER1_KALAH + 1, Board.PLAYER2_KALAH, Board.INITIAL_STONE_ON_PIT, Player.PLAYER_2.getPlayerId()));
+        pits.putAll(createPits(Board.PLAYER1_KALAH + 1, Board.PLAYER2_KALAH, applConfig.getNoOfStones(), Player.PLAYER_2.getPlayerId()));
 
         Pit house2 = new Pit(Board.PLAYER2_KALAH, Board.INITIAL_STONE_ON_KALAH, Player.PLAYER_2.getPlayerId());
         pits.put(Board.PLAYER2_KALAH, house2);

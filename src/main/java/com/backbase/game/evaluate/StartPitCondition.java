@@ -5,7 +5,6 @@ import com.backbase.game.model.GameStatus;
 import com.backbase.game.model.Pit;
 import com.backbase.game.model.Player;
 import com.backbase.game.exception.IllegalMoveException;
-
 import lombok.extern.slf4j.Slf4j;
 
 /**

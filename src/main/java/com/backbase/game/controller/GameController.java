@@ -1,8 +1,9 @@
 package com.backbase.game.controller;
 
-import com.backbase.game.model.Board;
+import com.backbase.game.configuration.ApplicationConfig;
 import com.backbase.game.model.GameResponse;
 import com.backbase.game.service.Game;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +21,11 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Api(value = GameController.GAME_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
 @RequestMapping(value = GameController.GAME_PATH, produces = { MediaType.APPLICATION_JSON_VALUE })
-@RestController @Validated @Slf4j
+@RestController @Slf4j
 public class GameController {
+
+    @Autowired
+    ApplicationConfig applicationConfig;
 
     public static final String GAME_PATH = "games";
     private final Game gameService;
@@ -30,19 +34,18 @@ public class GameController {
     }
 
     /**
-     * Create a Kalah Game and Initialize the Stones in each players pit except player's Kalah/House.
+     * Create a Kalah Game and Initialize the Stones in each players pit except player's House.
      * @return GameResponseInfo which has game id and url.
      */
-    @ApiOperation(value = "Create a Kalah Game and Initialize the Stones in each players pit except player's Kalah/House",
+    @ApiOperation(value = "Create a Kalah Game and Initialize the Stones in each players pit except player's House",
             httpMethod = "POST",
             response = GameResponse.class)
-
     @PostMapping
     public ResponseEntity<GameResponse> createAGameAndFillDefaultStones() {
 
         log.info("Starting kalah game");
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(gameService.initializeAGame(Board.INITIAL_STONE_ON_PIT));
+        return ResponseEntity.status(HttpStatus.CREATED).body(gameService.initializeAGame(applicationConfig.getNoOfStones()));
     }
 
     /**

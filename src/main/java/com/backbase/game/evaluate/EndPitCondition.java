@@ -42,8 +42,7 @@ public class EndPitCondition extends GameCondition {
         } else if (endPit.isPlayer2House() && game.getGameStatus().equals(GameStatus.PLAYER2_TURN)) {
             game.setGameStatus(GameStatus.PLAYER2_TURN);
         } else {
-            GameStatus changeStage =
-                    game.getGameStatus() == GameStatus.PLAYER1_TURN ? GameStatus.PLAYER2_TURN : GameStatus.PLAYER1_TURN;
+            GameStatus changeStage = game.getGameStatus() == GameStatus.PLAYER1_TURN ? GameStatus.PLAYER2_TURN : GameStatus.PLAYER1_TURN;
             game.setGameStatus(changeStage);
         }
         game.updateTime();

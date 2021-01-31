@@ -2,6 +2,9 @@ package com.backbase.game.evaluate;
 import com.backbase.game.model.Game;
 import com.backbase.game.model.Pit;
 
+/**
+ * This is abstract class with one abstract method apply.
+ */
 public abstract class GameCondition {
 
     protected GameCondition next;

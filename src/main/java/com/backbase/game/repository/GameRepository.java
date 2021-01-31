@@ -27,9 +27,7 @@ public class GameRepository {
 
     /**
      * This method create new Game and save the object in a Map.
-     *
      * @param initialStonesCountPerPit is the number of the stone of a pit.
-     *
      * @return GameResponseInfo object.
      */
     public GameResponse create(Integer initialStonesCountPerPit) {
@@ -44,15 +42,13 @@ public class GameRepository {
 
     /**
      * This method will return the game object by id.
-     *
      * @param id  is the game id.
-     *
      * @return Game if present.
      */
     public Game findById(String id) {
         Game game = games.get(id);
         if (game == null) {
-            throw new GameException("Game is not found for the id: " + id);
+            throw new GameException("Game is not present for the id: " + id);
         }
         return game;
     }

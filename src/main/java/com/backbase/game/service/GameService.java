@@ -27,8 +27,6 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @Service @Slf4j
 public class GameService implements Game {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(GameService.class);
-
     private final GameRepository gameRepository;
     private final EvaluateGameFlow gameEngine;
 
@@ -39,9 +37,7 @@ public class GameService implements Game {
 
     /**
      * This method is responsible to initialize new game
-     *
      * @param initialStonesCountPerPit is the initial number of stone.
-     *
      * @return GameInfo
      */
     @Override
@@ -71,11 +67,9 @@ public class GameService implements Game {
     private GameResponse createCurrentGameStatusResponse(String gameId, com.backbase.game.model.Game game) {
 
         Map<String, String> statusInfo = new TreeMap<>();
-
         game.getBoard().getPits().entrySet().forEach(entry -> {
             statusInfo.put(Integer.toString(entry.getKey()), Integer.toString(entry.getValue().getStoneCount()));
         });
-
         String gameLink = linkTo(methodOn(GameController.class).createAGameAndFillDefaultStones()).slash(gameId)
                 .toString();
 

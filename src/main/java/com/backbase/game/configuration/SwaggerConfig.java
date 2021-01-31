@@ -54,6 +54,9 @@ public class SwaggerConfig {
     }
 
     @Bean
+    /**
+     * This method returns the specific plugin needed.To reslove conflict this was added.
+     */
     public LinkDiscoverers discovers() {
         List plugins = new ArrayList<>();
         plugins.add(new CollectionJsonLinkDiscoverer());

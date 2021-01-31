@@ -4,8 +4,7 @@ import org.springframework.http.HttpStatus;
 import lombok.Getter;
 
 /**
- * This ExceptionResponse prepares whenever system behaves wrongly and the
- * same will be send back to the caller.
+ * This ExceptionResponse wrap exception and http status.
  *
  * @author Mahesh G
  *
@@ -21,6 +20,12 @@ public class ExceptionResponse {
         this.message = message;
     }
 
+    /**
+     * This is static method which sets the exception
+     * @param message as error message
+     * @param status http status
+     * @return ExceptionResponse pojo
+     */
     public static ExceptionResponse of(final String message, HttpStatus status) {
         return new ExceptionResponse(message, status);
     }
