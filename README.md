@@ -32,7 +32,7 @@ Go to Setting --> SSL certificate verification.This is self signed certificate.
 ![img_2.png](img_2.png)
 
 * Using Postman API Application to test EC2 instance.
-1. Just change the host name from localhost to EC2 host name. In this case its "ec2-3-95-222-33.compute-1.amazonaws.com".
+1. Just change the host name from localhost to EC2 host name. In this case its "**ec2-3-95-222-33.compute-1.amazonaws.com**".
 
 *You can create and access the game by below urls.
 
@@ -43,11 +43,11 @@ Go to Setting --> SSL certificate verification.This is self signed certificate.
 ## Install & Running
 
 1.Import the zip file in you local machine. (Intellij or eclipse IDE)
-2. After you import project, simply run mvn clean install. 
-3. Start application in IDE or open cmd and run this [curl --header "Content-Type: application/json" --request POST http://localhost:8080/games]
+2. After you import project as Maven project, simply run **mvn clean install**. 
+3. Start application in IDE or open cmd and run this **[curl --header "Content-Type: application/json" --request POST http://localhost:8080/games]**
 
 ## Building Docker image and deploying it.
-
+1. 
 
 ### Prerequisites
 * [Java 1.8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)  - Programming language
