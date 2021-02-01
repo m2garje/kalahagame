@@ -83,6 +83,7 @@ curl --header "Content-Type: application/json" --request PUT _http://localhost:8
 
 ### API documentation
 After running the project on dev/local environment and browse **http://localhost:8080/swagger-ui.html**
+
 Access swagger running on EC2 instance : http://ec2-3-95-222-33.compute-1.amazonaws.com:8080/swagger-ui.html
 
 
@@ -99,7 +100,9 @@ Access swagger running on EC2 instance : http://ec2-3-95-222-33.compute-1.amazon
 5. Deploy applications in Kubernetes for high scalability and high availability.
 
 
+
 ##Author
+
 Mahesh Garje
 
 
