@@ -42,7 +42,7 @@ public class StartPitCondition extends GameCondition {
         if ((game.getGameStatus().equals(GameStatus.PLAYER1_TURN) && startPit.getPitId() > Board.PLAYER1_KALAH)
                 ||
                 (game.getGameStatus().equals(GameStatus.PLAYER2_TURN) && startPit.getPitId()<Board.PLAYER1_KALAH)) {
-            throw new IllegalMoveException("Incorrect pit to play");
+            throw new IllegalMoveException("Incorrect pit to play.Its "+ game.getGameStatus()+ "  turn.. ");
         }
 
 
@@ -51,7 +51,7 @@ public class StartPitCondition extends GameCondition {
     private void checkEmptyStartRule(Pit startPit) {
 
         if (startPit.getStoneCount() == 0) {
-            throw new IllegalMoveException("Cannot start from empty pit");
+            throw new IllegalMoveException("Pit "+startPit.getPitId()+"  is Empty.Cannot start from empty pit");
         }
     }
 }
