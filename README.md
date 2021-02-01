@@ -10,34 +10,35 @@ This application can be started on https on local.If you want to enable https on
 * No stones are put in the opponent(s) Kalah. If the players last stone lands in his own Kalah, he gets another turn. This can be repeated any number of times before it's the other player's turn.
 
 ### How to use this game
-* Two human players to play the game, each in his own computer by accessing REST URIs.
-1. Create a game using [curl --header "Content-Type: application/json" --request POST http://localhost:8080/games] and returns game identifier and game url.
-2. Using Game Identifier, navigate different pit [curl --header "Content-Type: application/json" --request PUT  http://localhost:8080/games/{gameId}/pits/{pitId}] at the end of this action, result show about current status of the game by displaying Pit Id and it's stones count.
+* Two human players to play the game, each in his own computer by accessing REST URIs.User needs to access AWS instance URL below.
 
-* Using Postman API Application.
+1. Create a game using [curl --header "Content-Type: application/json" --request POST http://ec2-3-95-222-33.compute-1.amazonaws.com:8080/games] and returns game identifier and game url.
+2. Using Game Identifier, navigate different pit [curl --header "Content-Type: application/json" --request PUT  http://ec2-3-95-222-33.compute-1.amazonaws.com:8080/games/{gameId}/pits/{pitId}] at the end of this action, result show about current status of the game by displaying Pit Id and it's stones count.
+
+* Using Postman API Application (on Local machine)
 
 If you have enabled SSL properties then application will be started with https. Before testing application on Postman you need to disable SSL verification.
 Go to Setting --> SSL certificate verification.This is self signed certificate.
   ![img.png](img.png)
   
 
-1.Select POST method from the dropdown and enter request URL https://localhost:8080/games. You will get game id and url of the game.
+1.Select POST method from the dropdown and enter request URL _https://localhost:8080/games_. You will get game id and url of the game.
 
 
 ![img_1.png](img_1.png)
 
 
-2. Copy the game url from response append "/pits/{pit number} to it. This will give you response back with updated status of pits.
+2. Copy the game url from response append "**/pits/{pit number}** to it. This will give response back with updated status of pits.
 
 ![img_2.png](img_2.png)
 
-* Using Postman API Application to test EC2 instance.
+* Using Postman API Application to play on EC2 instance.
 1. Just change the host name from localhost to EC2 host name. In this case its "**ec2-3-95-222-33.compute-1.amazonaws.com**".
 
 *You can create and access the game by below urls.
 
-   1. Method - POST   URL:  http://ec2-3-95-222-33.compute-1.amazonaws.com:8080/games
-   2. Method - PUT    URL:  http://ec2-3-95-222-33.compute-1.amazonaws.com:8080/games/6efedd0d-ef78-4867-9ebb-ae777d20c5a2/pits/{Pit_number}
+   1. Method - POST   URL:  _http://ec2-3-95-222-33.compute-1.amazonaws.com:8080/games_
+   2. Method - PUT    URL:  _http://ec2-3-95-222-33.compute-1.amazonaws.com:8080/games/6efedd0d-ef78-4867-9ebb-ae777d20c5a2/pits/{Pit_number}_
 
 
 ## Install & Running
@@ -48,7 +49,7 @@ cd git/
 
 ##### 2) Clone the code from git into the folder
 
-git clone https://github.com/m2garje/kalahagame.git
+git clone _https://github.com/m2garje/kalahagame.git_
 
 ##### 3) Go into the folder kalahagame
 
@@ -61,11 +62,12 @@ mvn spring-boot:run
 #### 4b) Start the application on local using docker
 
 docker image build -t kalahagame .
+
 docker run -it kalahagame -p 8080:8080
 
 ##### 5) Call the API using curl
 
-curl --header "Content-Type: application/json" --request PUT http://localhost:8080/games/{gameId}/pits/{pitId}
+curl --header "Content-Type: application/json" --request PUT _http://localhost:8080/games/{gameId}/pits/{pitId}_
 
 
 ### Prerequisites
@@ -74,26 +76,29 @@ curl --header "Content-Type: application/json" --request PUT http://localhost:80
 * [Spring Framework 5+](https://spring.io/projects/spring-framework) - Spring Framework
 * [Spring Hateoas](https://spring.io/projects/spring-hateoas) - Spring Hateoas
 * [Maven](https://maven.apache.org/) - Build tool
-* [Docker](https://docker.com/) - Build image
+* [Docker](https://docker.com/) - Build docker images
 * [Junit](https://junit.org/junit5/) - Junit
 * [AWS EC2 Instance](https://aws.amazon.com/ec2/instance-types/) - Instance for deployment
 
 
 ### API documentation
-After running the project on dev/local environment and browse http://localhost:8080/swagger-ui.html
+After running the project on dev/local environment and browse **http://localhost:8080/swagger-ui.html**
 
 
 ###Future improvements
 
-1.Introduce Spring Cloud ecosystem to manage multiple instances with service discovery,loadbalancing,configuration management and circuit breaker.
-2.Include security in the requests (using SSL/TLS) , now partially done for local PC.
-3.Introduce a persistence layer to store past game history.
-4.Create GUI with the help of react and angular js to make it more interactive.
+1.Introduce Spring Cloud ecosystem to manage multiple instances with Eureka service discovery,spring gateway,configuration management and circuit breaker for on premise.
 
+2.Include security in the requests (using SSL/TLS) , now partially done for local PC.
+
+3.Create GUI with the help of react or angular js to make it more interactive.
+
+4.Introduce a persistence layer to store past game history.
+
+5. Deploy applications in Kubernetes for high scalability and high availability.
 
 
 ##Author
-
 Mahesh Garje
 
 
