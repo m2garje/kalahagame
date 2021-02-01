@@ -1,5 +1,5 @@
 ## Kalah Game - Backbase Assignment
-This is Java8 SpringBoot RestFul Webservice that runs the "n" number of stones in pit.The number of stones can be configured in application.properties file.I have set number of stones to 6 for now.When the game starts it will load 6 stones by default in pits.This game runs on EC2 instance So,you can access this game from anywhere. 2 players can play the game from there PC.
+This is Java8 SpringBoot RestFul Webservice that runs with "n" number of stones in pit.The number of stones can be configured in application.properties file.I have set number of stones to 6 for now.When the game starts it will load 6 stones by default in pits.This game runs on EC2 instance So,you can access this game from anywhere. 2 players can play the game from there PC.
 This application can be started on https on local.If you want to enable https on local environment just enable the SSL properties in properties file.
 
 ### About the game
