@@ -1,0 +1,27 @@
+2021-01-31 00:29:24,797 [restartedMain] INFO  com.backbase.game.KalahGameApplication             - Starting KalahGameApplication using Java 1.8.0_271 on DESKTOP-0CL0H11 with PID 8620 (C:\Users\admin\Downloads\kalah-game\kalah-game\target\classes started by admin in C:\Users\admin\Downloads\kalah-game\kalah-game)
+2021-01-31 00:29:24,802 [restartedMain] DEBUG com.backbase.game.KalahGameApplication             - Running with Spring Boot v2.4.2, Spring v5.3.3
+2021-01-31 00:29:24,803 [restartedMain] INFO  com.backbase.game.KalahGameApplication             - No active profile set, falling back to default profiles: default
+2021-01-31 00:29:24,938 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor    - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-01-31 00:29:24,940 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor    - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-01-31 00:29:28,130 [restartedMain] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer            - Tomcat initialized with port(s): 8080 (https)
+2021-01-31 00:29:28,209 [restartedMain] INFO  o.apache.coyote.http11.Http11NioProtocol           - Initializing ProtocolHandler ["https-jsse-nio-8080"]
+2021-01-31 00:29:28,211 [restartedMain] INFO  org.apache.catalina.core.StandardService           - Starting service [Tomcat]
+2021-01-31 00:29:28,212 [restartedMain] INFO  org.apache.catalina.core.StandardEngine            - Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-01-31 00:29:28,543 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/]                 - Initializing Spring embedded WebApplicationContext
+2021-01-31 00:29:28,544 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext     - Root WebApplicationContext: initialization completed in 3601 ms
+2021-01-31 00:29:29,470 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver                - Exposing 2 endpoint(s) beneath base path '/actuator'
+2021-01-31 00:29:29,624 [restartedMain] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-01-31 00:29:29,927 [restartedMain] INFO  o.s.s.concurrent.ThreadPoolTaskExecutor            - Initializing ExecutorService 'applicationTaskExecutor'
+2021-01-31 00:29:30,053 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer                 - LiveReload server is running on port 35729
+2021-01-31 00:29:30,342 [restartedMain] INFO  o.apache.coyote.http11.Http11NioProtocol           - Starting ProtocolHandler ["https-jsse-nio-8080"]
+2021-01-31 00:29:31,240 [restartedMain] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer            - Tomcat started on port(s): 8080 (https) with context path ''
+2021-01-31 00:29:31,242 [restartedMain] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper         - Context refreshed
+2021-01-31 00:29:31,298 [restartedMain] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper         - Found 1 custom documentation plugin(s)
+2021-01-31 00:29:31,339 [restartedMain] INFO  s.d.s.w.s.ApiListingReferenceScanner               - Scanning for api listing references
+2021-01-31 00:29:31,603 [restartedMain] INFO  com.backbase.game.KalahGameApplication             - Started KalahGameApplication in 7.756 seconds (JVM running for 11.587)
+2021-01-31 00:29:31,613 [restartedMain] INFO  com.backbase.game.KalahGameApplication             - Application started..
+2021-01-31 00:29:32,665 [RMI TCP Connection(2)-192.168.1.15] INFO  o.a.c.c.C.[Tomcat].[localhost].[/]                 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-01-31 00:29:32,666 [RMI TCP Connection(2)-192.168.1.15] INFO  o.s.web.servlet.DispatcherServlet                  - Initializing Servlet 'dispatcherServlet'
+2021-01-31 00:29:32,669 [RMI TCP Connection(2)-192.168.1.15] INFO  o.s.web.servlet.DispatcherServlet                  - Completed initialization in 3 ms
+2021-01-31 00:29:43,589 [https-jsse-nio-8080-exec-7] INFO  c.b.game.controller.GameController                 - Starting kalah game
+2021-01-31 00:36:27,102 [Thread-16] INFO  o.s.s.concurrent.ThreadPoolTaskExecutor            - Shutting down ExecutorService 'applicationTaskExecutor'

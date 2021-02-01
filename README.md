@@ -48,11 +48,11 @@ cd git/
 
 ##### 2) Clone the code from git into the folder
 
-git clone https://github.com/m2garje/demo1.git
+git clone https://github.com/m2garje/kalahagame.git
 
-##### 3) Go into the folder demo1
+##### 3) Go into the folder kalahagame
 
-cd demo1
+cd kalahagame
 
 ##### 4a) Start the application on local using maven
 
@@ -60,8 +60,8 @@ mvn spring-boot:run
 
 #### 4b) Start the application on local using docker
 
-docker image build -t demo1 .
-docker run -it demo1 -p 8080:8080
+docker image build -t kalahagame .
+docker run -it kalahagame -p 8080:8080
 
 ##### 5) Call the API using curl
 
@@ -84,7 +84,8 @@ After running the project on dev/local environment and browse http://localhost:8
 
 
 ###Future improvements
-1.Introduce Spring Cloud ecosystem to manage multiple instances with service discovery,loadbalancing,configuration management, and circuit breaker.
+
+1.Introduce Spring Cloud ecosystem to manage multiple instances with service discovery,loadbalancing,configuration management and circuit breaker.
 2.Include security in the requests (using SSL/TLS) , now partially done for local PC.
 3.Introduce a persistence layer to store past game history.
 4.Create GUI with the help of react and angular js to make it more interactive.
@@ -92,6 +93,7 @@ After running the project on dev/local environment and browse http://localhost:8
 
 
 ##Author
+
 Mahesh Garje
 
 
