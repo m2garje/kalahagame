@@ -42,12 +42,31 @@ Go to Setting --> SSL certificate verification.This is self signed certificate.
 
 ## Install & Running
 
-1.Import the zip file in you local machine. (Intellij or eclipse IDE)
-2. After you import project as Maven project, simply run **mvn clean install**. 
-3. Start application in IDE or open cmd and run this **[curl --header "Content-Type: application/json" --request POST http://localhost:8080/games]**
+##### 1) Open Git Bash. Go to the folder where you want to checkout the code.
 
-## Building Docker image and deploying it.
-1. 
+cd git/
+
+##### 2) Clone the code from git into the folder
+
+git clone https://github.com/m2garje/demo1.git
+
+##### 3) Go into the folder demo1
+
+cd demo1
+
+##### 4a) Start the application on local using maven
+
+mvn spring-boot:run
+
+#### 4b) Start the application on local using docker
+
+docker image build -t demo1 .
+docker run -it demo1 -p 8080:8080
+
+##### 5) Call the API using curl
+
+curl --header "Content-Type: application/json" --request PUT http://localhost:8080/games/{gameId}/pits/{pitId}
+
 
 ### Prerequisites
 * [Java 1.8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)  - Programming language
@@ -65,14 +84,14 @@ After running the project on dev/local environment and browse http://localhost:8
 
 
 ###Future improvements
-1.Introduce Spring Cloud ecosystem to manage multiple instances with service discovery and loadbalancing.
+1.Introduce Spring Cloud ecosystem to manage multiple instances with service discovery,loadbalancing,configuration management, and circuit breaker.
 2.Include security in the requests (using SSL/TLS) , now partially done for local PC.
 3.Introduce a persistence layer to store past game history.
-4.Create GUI with the help of react and angular js.
+4.Create GUI with the help of react and angular js to make it more interactive.
 
 
 
-Author
+##Author
 Mahesh Garje
 
 
