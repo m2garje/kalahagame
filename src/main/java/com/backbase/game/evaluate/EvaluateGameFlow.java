@@ -1,9 +1,8 @@
 package com.backbase.game.evaluate;
 
-import org.springframework.stereotype.Component;
-
 import com.backbase.game.model.Game;
 import com.backbase.game.model.Pit;
+import org.springframework.stereotype.Component;
 
 /**
  * This class used to prepare Game evaluation conditions. Later based on Game play condition

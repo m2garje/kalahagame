@@ -1,11 +1,8 @@
 package com.backbase.game.model;
-import javax.validation.constraints.NotNull;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * This class represent the pit of the board.
@@ -13,7 +10,8 @@ import lombok.ToString;
  * @author Mahesh G
  */
 @ToString
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Pit {
@@ -31,7 +29,7 @@ public class Pit {
      * This method is use to determine different between pit & player house.
      *
      * @return Boolean false if player1 with house2 Or player 2 with house1,
-     *         otherwise true
+     * otherwise true
      */
     public Boolean isDistributable(GameStatus gameStatus) {
 
@@ -44,7 +42,6 @@ public class Pit {
      * owns pit id from 1-7. Player 2 owns pit id from 8-14.
      *
      * @param gameStatus current game state. In this case player turn
-     *
      * @return True if current player is the owner of this pit otherwise false.
      */
     public Boolean isPlayerPit(GameStatus gameStatus) {
@@ -95,6 +92,7 @@ public class Pit {
 
     /**
      * This method return the opposite pit id.
+     * eg. 14-5= 9 , 14-1=13 , 14-8=6
      *
      * @return pitIndex of the opposite pit.
      */

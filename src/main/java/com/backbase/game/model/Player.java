@@ -4,16 +4,15 @@ package com.backbase.game.model;
  * This Kalah game is supported for TWO players.
  *
  * @author Mahesh G
- *
  */
 public enum Player {
 
-    PLAYER_1 (1),
-    PLAYER_2 (2);
+    PLAYER_1(1),
+    PLAYER_2(2);
 
-    private Integer playerId;
+    private final Integer playerId;
 
-    private Player(Integer playerId) {
+    Player(Integer playerId) {
         this.playerId = playerId;
     }
 

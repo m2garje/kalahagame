@@ -1,7 +1,5 @@
 package com.backbase.game.exception;
-import java.util.ArrayList;
 
-import javax.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -13,7 +11,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
  * exception handler class.
  *
  * @author Mahesh G
- *
  */
 @ControllerAdvice
 public class GameExceptionHandler extends ResponseEntityExceptionHandler {

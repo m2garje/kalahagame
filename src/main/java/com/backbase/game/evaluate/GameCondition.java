@@ -1,4 +1,5 @@
 package com.backbase.game.evaluate;
+
 import com.backbase.game.model.Game;
 import com.backbase.game.model.Pit;
 

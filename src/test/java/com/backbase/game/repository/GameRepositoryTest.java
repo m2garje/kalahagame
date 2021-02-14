@@ -1,24 +1,22 @@
 package com.backbase.game.repository;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
 import com.backbase.game.model.Game;
 import com.backbase.game.model.GameResponse;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
+
 
 /**
- *
  * @author Mahesh G
- *
  */
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class GameRepositoryTest {
 
-    @Autowired
+    @InjectMocks
     private GameRepository gameRepository;
 
     @Test

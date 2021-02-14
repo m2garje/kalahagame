@@ -1,17 +1,16 @@
 package com.backbase.game.service;
+
+import com.backbase.game.controller.GameController;
+import com.backbase.game.evaluate.EvaluateGameFlow;
+import com.backbase.game.model.GameResponse;
+import com.backbase.game.model.Pit;
+import com.backbase.game.repository.GameRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.backbase.game.KalahGameApplication;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
-import com.backbase.game.controller.GameController;
-import com.backbase.game.model.GameResponse;
-import com.backbase.game.model.Pit;
-import com.backbase.game.evaluate.EvaluateGameFlow;
-import com.backbase.game.repository.GameRepository;
-import lombok.extern.slf4j.Slf4j;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
@@ -22,9 +21,9 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
  * 2. Play by pick stones from current players pit(1-6 and 8-13) except their Kalah/House(7 and 14)
  *
  * @author Mahesh G
- *
  */
-@Service @Slf4j
+@Service
+@Slf4j
 public class GameService implements Game {
 
     private final GameRepository gameRepository;
@@ -35,8 +34,10 @@ public class GameService implements Game {
         this.gameEngine = gameEngine;
     }
 
+
     /**
      * This method is responsible to initialize new game
+     *
      * @param initialStonesCountPerPit is the initial number of stone.
      * @return GameInfo
      */
@@ -47,8 +48,9 @@ public class GameService implements Game {
 
     /**
      * This method is responsible for every new move of the stones from a pit.
+     *
      * @param gameId game id
-     * @param pitId id of the pit
+     * @param pitId  id of the pit
      * @return GameResponseInfo which contains the status of pits.
      */
     @Override
@@ -58,7 +60,7 @@ public class GameService implements Game {
         com.backbase.game.model.Game game = gameRepository.findById(gameId);
         Pit pit = game.getBoard().getPitByPitId(pitId);
 
-         gameEngine.execute(game, pit);
+        gameEngine.execute(game, pit);
 
         return createCurrentGameStatusResponse(gameId, game);
 

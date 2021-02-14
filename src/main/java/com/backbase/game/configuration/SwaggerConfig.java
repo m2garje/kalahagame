@@ -1,17 +1,11 @@
 package com.backbase.game.configuration;
 
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.hateoas.client.LinkDiscoverer;
 import org.springframework.hateoas.client.LinkDiscoverers;
 import org.springframework.hateoas.mediatype.collectionjson.CollectionJsonLinkDiscoverer;
 import org.springframework.plugin.core.SimplePluginRegistry;
@@ -23,14 +17,18 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * This configuration class is use to configure SwaggerUI api document to run
  * internal application controllers.
  *
  * @author Mahesh G
- *
  */
-@Getter @Setter
+@Getter
+@Setter
 @ConfigurationProperties(prefix = "swagger")
 @Configuration
 @EnableSwagger2

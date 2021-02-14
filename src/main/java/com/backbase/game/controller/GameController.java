@@ -3,38 +3,39 @@ package com.backbase.game.controller;
 import com.backbase.game.configuration.ApplicationConfig;
 import com.backbase.game.model.GameResponse;
 import com.backbase.game.service.Game;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * This is controller class for kalah game.
- * @author Mahesh G
  *
+ * @author Mahesh G
  */
 @Api(value = GameController.GAME_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
-@RequestMapping(value = GameController.GAME_PATH, produces = { MediaType.APPLICATION_JSON_VALUE })
-@RestController @Slf4j
+@RequestMapping(value = GameController.GAME_PATH, produces = {MediaType.APPLICATION_JSON_VALUE})
+@RestController
+@Slf4j
 public class GameController {
-
-    @Autowired
-    ApplicationConfig applicationConfig;
 
     public static final String GAME_PATH = "games";
     private final Game gameService;
-    public GameController(Game gameService) {
+    private final ApplicationConfig applicationConfig;
+
+
+    public GameController(Game gameService, ApplicationConfig applicationConfig) {
+        this.applicationConfig = applicationConfig;
         this.gameService = gameService;
     }
 
     /**
      * Create a Kalah Game and Initialize the Stones in each players pit except player's House.
+     *
      * @return GameResponseInfo which has game id and url.
      */
     @ApiOperation(value = "Create a Kalah Game and Initialize the Stones in each players pit except player's House",
@@ -53,7 +54,7 @@ public class GameController {
      * Apply various game rules and update the pits accordingly.
      *
      * @param gameId current Game Identifier
-     * @param pitId selected Pit Identifier
+     * @param pitId  selected Pit Identifier
      * @return GameResponse with pits status and house status.
      */
     @ApiOperation(
@@ -68,7 +69,6 @@ public class GameController {
             @PathVariable Integer pitId) {
 
         log.info("Picking stones from {} for the game {}", pitId, gameId);
-
         return ResponseEntity.ok().body(gameService.play(gameId, pitId));
     }
 }

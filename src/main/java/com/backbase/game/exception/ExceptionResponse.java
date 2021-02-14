@@ -1,13 +1,12 @@
 package com.backbase.game.exception;
 
-import org.springframework.http.HttpStatus;
 import lombok.Getter;
+import org.springframework.http.HttpStatus;
 
 /**
  * This ExceptionResponse wrap exception and http status.
  *
  * @author Mahesh G
- *
  */
 @Getter
 public class ExceptionResponse {
@@ -22,8 +21,9 @@ public class ExceptionResponse {
 
     /**
      * This is static method which sets the exception
+     *
      * @param message as error message
-     * @param status http status
+     * @param status  http status
      * @return ExceptionResponse pojo
      */
     public static ExceptionResponse of(final String message, HttpStatus status) {

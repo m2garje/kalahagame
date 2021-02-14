@@ -1,27 +1,27 @@
 package com.backbase.game.service;
 
-import com.backbase.game.exception.GameException;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
+import com.backbase.game.evaluate.EvaluateGameFlow;
+import com.backbase.game.exception.IllegalMoveException;
 import com.backbase.game.model.Board;
 import com.backbase.game.model.Game;
 import com.backbase.game.model.GameStatus;
 import com.backbase.game.model.Pit;
-import com.backbase.game.evaluate.EvaluateGameFlow;
-import com.backbase.game.exception.IllegalMoveException;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class GameEngineTest {
 
-    @Autowired private EvaluateGameFlow evaluateGame;
+    @InjectMocks
+    private EvaluateGameFlow evaluateGame;
+
 
     @Test
-    public void shouldStartWithOwnPit(){
+    public void shouldStartWithOwnPit() {
 
         //given
         Game game = new Game(6);
@@ -31,7 +31,7 @@ public class GameEngineTest {
 
         //then
         Assertions.assertEquals(Integer.valueOf(0), game.getBoard().getStoneCountByPitId(1));
-        Assertions.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(2) );
+        Assertions.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(2));
         Assertions.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(3));
         Assertions.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(4));
         Assertions.assertEquals(Integer.valueOf(7), game.getBoard().getStoneCountByPitId(5));
@@ -44,7 +44,7 @@ public class GameEngineTest {
     }
 
     @Test
-    public void shouldNotStartWithEmptyPit(){
+    public void shouldNotStartWithEmptyPit() {
         //given
         Game game = new Game(6);
         Pit pit = game.getBoard().getPits().get(2);
@@ -52,13 +52,13 @@ public class GameEngineTest {
 
         //when
         Assertions.assertThrows(IllegalMoveException.class, () -> {
-        evaluateGame.execute(game, game.getBoard().getPitByPitId(2));
+            evaluateGame.execute(game, game.getBoard().getPitByPitId(2));
         });
 
     }
 
     @Test
-    public void shouldNotStartWithOpponentPit(){
+    public void shouldNotStartWithOpponentPit() {
         //given
         Game game = new Game(6);
         game.setGameStatus(GameStatus.PLAYER2_TURN);
@@ -68,6 +68,7 @@ public class GameEngineTest {
             evaluateGame.execute(game, game.getBoard().getPitByPitId(2));
         });
     }
+
     @Test
     public void shouldDistributeStoneFromPlayer2PitToPlayer1Pit() {
         //given
@@ -90,7 +91,7 @@ public class GameEngineTest {
     }
 
     @Test
-    public void shouldDistributeStoneFromPlayer1PitToPlayer2Pit(){
+    public void shouldDistributeStoneFromPlayer1PitToPlayer2Pit() {
         //given
         Game game = new Game(6);
 
@@ -111,7 +112,7 @@ public class GameEngineTest {
     }
 
     @Test
-    public void shouldDistribute13Stone(){
+    public void shouldDistribute13Stone() {
         //given
         Game game = new Game(6);
         game.getBoard().getPits().get(4).setStoneCount(13);
@@ -148,7 +149,7 @@ public class GameEngineTest {
 
         //then
         Assertions.assertEquals(Integer.valueOf(0), game.getBoard().getStoneCountByPitId(1));
-        Assertions.assertEquals(Integer.valueOf(0), game.getBoard().getStoneCountByPitId(3) );
+        Assertions.assertEquals(Integer.valueOf(0), game.getBoard().getStoneCountByPitId(3));
         Assertions.assertEquals(Integer.valueOf(0), game.getBoard().getStoneCountByPitId(11));
         Assertions.assertEquals(GameStatus.PLAYER2_TURN, game.getGameStatus());
         Assertions.assertEquals(Integer.valueOf(7), game.getBoard().getPits().get(Board.PLAYER1_KALAH).getStoneCount());
@@ -203,9 +204,9 @@ public class GameEngineTest {
 
         //given
         Game game = new Game(6);
-        for(Integer key : game.getBoard().getPits().keySet()){
+        for (Integer key : game.getBoard().getPits().keySet()) {
             Pit pit = game.getBoard().getPits().get(key);
-            if(!pit.isKalahPit()) {
+            if (!pit.isKalahPit()) {
                 pit.setStoneCount(0);
             }
         }
@@ -225,9 +226,9 @@ public class GameEngineTest {
 
         //given
         Game game = new Game(6);
-        for(Integer key : game.getBoard().getPits().keySet()){
+        for (Integer key : game.getBoard().getPits().keySet()) {
             Pit pit = game.getBoard().getPits().get(key);
-            if(!pit.isKalahPit()) {
+            if (!pit.isKalahPit()) {
                 pit.setStoneCount(0);
             }
         }
@@ -243,13 +244,13 @@ public class GameEngineTest {
     }
 
     @Test
-    public void shouldPlayer2Win(){
+    public void shouldPlayer2Win() {
 
         //given
         Game game = new Game(6);
-        for(Integer key : game.getBoard().getPits().keySet()){
+        for (Integer key : game.getBoard().getPits().keySet()) {
             Pit pit = game.getBoard().getPits().get(key);
-            if(!pit.isKalahPit()) {
+            if (!pit.isKalahPit()) {
                 pit.setStoneCount(0);
             }
         }
@@ -264,13 +265,13 @@ public class GameEngineTest {
     }
 
     @Test
-    public void shouldDraw(){
+    public void shouldDraw() {
 
         //given
         Game game = new Game(6);
-        for(Integer key : game.getBoard().getPits().keySet()){
+        for (Integer key : game.getBoard().getPits().keySet()) {
             Pit pit = game.getBoard().getPits().get(key);
-            if(!pit.isKalahPit()) {
+            if (!pit.isKalahPit()) {
                 pit.setStoneCount(0);
             }
         }

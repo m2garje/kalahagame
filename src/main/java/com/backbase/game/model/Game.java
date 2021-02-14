@@ -1,11 +1,11 @@
 package com.backbase.game.model;
 
-import java.time.LocalDateTime;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.time.LocalDateTime;
 
 /**
  * This class represent the game. A game contain players, board, games status
@@ -14,7 +14,8 @@ import lombok.ToString;
  * @author Mahesh G
  */
 @ToString
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 public class Game {
 

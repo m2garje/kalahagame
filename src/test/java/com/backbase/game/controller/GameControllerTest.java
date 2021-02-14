@@ -1,14 +1,13 @@
 package com.backbase.game.controller;
 
-
-import javax.annotation.PostConstruct;
-
+import com.backbase.game.model.GameResponse;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -16,17 +15,12 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.backbase.game.model.GameResponse;
+import javax.annotation.PostConstruct;
 
 /**
- *
  * @author Mahesh G
- *
  */
-@SpringBootTest
-@WebAppConfiguration
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class GameControllerTest {
 
     @Autowired
@@ -72,9 +66,9 @@ public class GameControllerTest {
 
         mockMvc.perform(playGame)
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(gameResponse.getId()))		//check game id
-                .andExpect(MockMvcResultMatchers.jsonPath("$.url").value(gameResponse.getUrl()))	//check game url
-                .andExpect(MockMvcResultMatchers.jsonPath("$.status.size()", Matchers.is(14)))		//check total pit size
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(gameResponse.getId()))        //check game id
+                .andExpect(MockMvcResultMatchers.jsonPath("$.url").value(gameResponse.getUrl()))    //check game url
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status.size()", Matchers.is(14)))        //check total pit size
                 .andReturn();
 
     }

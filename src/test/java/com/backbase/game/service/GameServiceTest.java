@@ -1,5 +1,16 @@
 package com.backbase.game.service;
 
+import com.backbase.game.configuration.ApplicationConfig;
+import com.backbase.game.controller.GameController;
+import com.backbase.game.model.*;
+import com.backbase.game.repository.GameRepository;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.mockito.BDDMockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -8,41 +19,18 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import com.backbase.game.configuration.ApplicationConfig;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.mockito.BDDMockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import com.backbase.game.controller.GameController;
-import com.backbase.game.model.Board;
-import com.backbase.game.model.GameResponse;
-import com.backbase.game.model.GameStatus;
-import com.backbase.game.model.Pit;
-import com.backbase.game.model.Player;
-import com.backbase.game.evaluate.EvaluateGameFlow;
-import com.backbase.game.repository.GameRepository;
-
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 
 /**
- *
  * @author Mahesh G
- *
  */
 @SpringBootTest
 public class GameServiceTest {
 
     @MockBean
     private GameRepository gameRepository;
-
-    @MockBean
-    private EvaluateGameFlow gameEngine;
 
     @Autowired
     private Game gameService;
@@ -51,7 +39,7 @@ public class GameServiceTest {
     private ApplicationConfig applConfig;
 
     @Test
-    public void shouldInitGame(){
+    public void shouldInitGame() {
 
         GameResponse gameResponse = new GameResponse();
         gameResponse.setId(UUID.randomUUID().toString());
@@ -71,7 +59,7 @@ public class GameServiceTest {
     }
 
     @Test
-    public void shouldPlayGame(){
+    public void shouldPlayGame() {
 
         Player player1 = Player.PLAYER_1;
         Player player2 = Player.PLAYER_2;
@@ -103,13 +91,13 @@ public class GameServiceTest {
         BDDMockito.given(gameRepository.create(BDDMockito.any())).willReturn(gameResponse);
 
         //when
-        GameResponse mockResponse =  gameService.play(game.getId(), game.getBoard().getPits().get(1).getPitId());
+        GameResponse mockResponse = gameService.play(game.getId(), game.getBoard().getPits().get(1).getPitId());
 
         //then
         Assertions.assertEquals(gameResponse.getStatus().isEmpty(), mockResponse.getStatus().isEmpty());
     }
 
-    private Map<Integer, Pit> initPit(){
+    private Map<Integer, Pit> initPit() {
         Map<Integer, Pit> pits = new HashMap<>();
 
         pits.putAll(createPits(Board.PIT_START_ID, Board.PLAYER1_KALAH, applConfig.getNoOfStones(), Player.PLAYER_1.getPlayerId()));

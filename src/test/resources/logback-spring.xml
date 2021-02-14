@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <property name="LOGLOCATION" value ="/target"/>
+    <property name="LOGLOCATION" value="/target"/>
     <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d [%thread] %-5level %-50logger{40} - %msg%n</pattern>
@@ -21,16 +21,16 @@
             <cleanHistoryOnStart>true</cleanHistoryOnStart>
         </rollingPolicy>
     </appender>
-  <!--LOG everything at INFO level -->
+    <!--LOG everything at INFO level -->
     <root level="INFO">
-        <appender-ref ref="Console" />
-        <appender-ref ref="RollingFile" />
+        <appender-ref ref="Console"/>
+        <appender-ref ref="RollingFile"/>
     </root>
 
     <!--LOG com.backbase.game at INFO level -->
-    <logger name ="com.backbase.game" level="INFO" additivity="false">
-    <appender-ref ref="Console" />
-    <appender-ref ref="RollingFile" />
+    <logger name="com.backbase.game" level="INFO" additivity="false">
+        <appender-ref ref="Console"/>
+        <appender-ref ref="RollingFile"/>
     </logger>
 </configuration>
 

@@ -2,6 +2,7 @@ package com.backbase.game.model;
 
 /**
  * Identifies the current game status , it can be init , player1,player2,or finished.
+ *
  * @author Mahesh G
  */
 public enum GameStatus {

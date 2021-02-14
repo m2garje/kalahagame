@@ -2,7 +2,6 @@ package com.backbase.game.evaluate;
 
 import com.backbase.game.model.Game;
 import com.backbase.game.model.Pit;
-
 import lombok.extern.slf4j.Slf4j;
 
 /**

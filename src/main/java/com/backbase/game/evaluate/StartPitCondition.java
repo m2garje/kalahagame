@@ -1,10 +1,7 @@
 package com.backbase.game.evaluate;
-import com.backbase.game.model.Board;
-import com.backbase.game.model.Game;
-import com.backbase.game.model.GameStatus;
-import com.backbase.game.model.Pit;
-import com.backbase.game.model.Player;
+
 import com.backbase.game.exception.IllegalMoveException;
+import com.backbase.game.model.*;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -25,11 +22,11 @@ public class StartPitCondition extends GameCondition {
 
     private void checkPlayerTurnRule(Game game, Pit startPit) {
 
-        if(null==startPit){
+        if (null == startPit) {
             throw new IllegalMoveException("Please select pits from 1-6 OR 8-13");
         }
 
-        if(startPit.getPitId()== Board.PLAYER1_KALAH || startPit.getPitId()==Board.PLAYER2_KALAH){
+        if (startPit.getPitId() == Board.PLAYER1_KALAH || startPit.getPitId() == Board.PLAYER2_KALAH) {
             throw new IllegalMoveException("Kalah or House stone(s) are not allowed to distribute.");
         }
 
@@ -41,8 +38,8 @@ public class StartPitCondition extends GameCondition {
 
         if ((game.getGameStatus().equals(GameStatus.PLAYER1_TURN) && startPit.getPitId() > Board.PLAYER1_KALAH)
                 ||
-                (game.getGameStatus().equals(GameStatus.PLAYER2_TURN) && startPit.getPitId()<Board.PLAYER1_KALAH)) {
-            throw new IllegalMoveException("Incorrect pit to play.Its "+ game.getGameStatus()+ "  turn.. ");
+                (game.getGameStatus().equals(GameStatus.PLAYER2_TURN) && startPit.getPitId() < Board.PLAYER1_KALAH)) {
+            throw new IllegalMoveException("Incorrect pit to play.Its " + game.getGameStatus() + "  turn.. ");
         }
 
 
@@ -51,7 +48,7 @@ public class StartPitCondition extends GameCondition {
     private void checkEmptyStartRule(Pit startPit) {
 
         if (startPit.getStoneCount() == 0) {
-            throw new IllegalMoveException("Pit "+startPit.getPitId()+"  is Empty.Cannot start from empty pit");
+            throw new IllegalMoveException("Pit " + startPit.getPitId() + "  is Empty.Cannot start from empty pit");
         }
     }
 }

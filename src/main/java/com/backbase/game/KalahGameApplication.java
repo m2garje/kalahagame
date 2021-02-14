@@ -9,12 +9,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class KalahGameApplication {
 
 
-	public static void main(String[] args) {
-		SpringApplication.run(KalahGameApplication.class, args);
+    public static void main(String[] args) {
+        SpringApplication.run(KalahGameApplication.class, args);
 
-		log.info("Application started..");
-	}
-
+        log.info("Application started..");
+    }
 
 
 }
